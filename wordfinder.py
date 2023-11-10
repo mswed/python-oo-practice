@@ -1,9 +1,32 @@
 """Word Finder: finds random words from a dictionary."""
-from random import choice
-
+import random
 
 class WordFinder:
-    """Class to pick a random word from a file"""
+    """Class to pick a random word from a file
+    >>> finder = WordFinder('/home/mswed/Documents/Coding/Springboard/Python/oop/python-oo-practice/words.txt')
+    235886 words read
+    >>> type(finder)
+    <class 'wordfinder.WordFinder'>
+    >>> random.seed(1)
+    >>> finder.random()
+    'choler'
+    >>> finder.random()
+    'pneumodynamics'
+    >>> finder.random()
+    'unrulableness'
+
+    >>> finder = SpecialWordFinder('/home/mswed/Documents/Coding/Springboard/Python/oop/python-oo-practice/other_words.txt')
+    4 words read
+    >>> type(finder)
+    <class 'wordfinder.SpecialWordFinder'>
+    >>> random.seed(1)
+    >>> finder.random()
+    'parsnips'
+    >>> finder.random()
+    'kale'
+    >>> finder.random()
+    'apple'
+    """
 
     def __init__(self, path):
         """
@@ -15,6 +38,9 @@ class WordFinder:
         self.words = self.load_file()
         print(f'{len(self.words)} words read')
 
+    def __repr__(self):
+        return f'<WordFinder path={self.path}>'
+
     def load_file(self):
         words = []
         with open(self.path, 'r') as input_file:
@@ -24,7 +50,7 @@ class WordFinder:
         return words
 
     def random(self):
-        print(choice(self.words))
+        return random.choice(self.words)
 
 
 class SpecialWordFinder(WordFinder):
@@ -35,8 +61,4 @@ class SpecialWordFinder(WordFinder):
         words = super().load_file()
         return [word for word in words if not word.startswith('#') and word != '']
 
-# finder = WordFinder('/home/mswed/Documents/Coding/Springboard/Python/oop/python-oo-practice/words.txt')
-# finder.random()
 
-finder = SpecialWordFinder('/home/mswed/Documents/Coding/Springboard/Python/oop/python-oo-practice/other_words.txt')
-finder.random()

@@ -30,6 +30,8 @@ class SerialGenerator:
         self.start = start
         self.counter = start - 1
 
+    def __repr__(self):
+        return f'<SerialGenerator start={self.start} next={self.counter + 1}'
     def generate(self):
         """
         Increment the counter by one
